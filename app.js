@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
     startStopButton.innerText = 'Start game';
     console.log('clearing interval');
 
-    snake = [0];
+    snake = [0, 0, 0];
     snakeHeadPosition = snake[0];
     direction = 0;
 
@@ -79,4 +79,23 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   };
+
+  window.addEventListener('keyup', (event) => {
+    switch (event.code) {
+      case 'ArrowUp':
+        direction = -10;
+        break;
+      case 'ArrowDown':
+        direction = 10;
+        break;
+      case 'ArrowLeft':
+        direction = -1;
+        break;
+      case 'ArrowRight':
+        direction = 1;
+        break;
+      default:
+        break;
+    }
+  });
 });
