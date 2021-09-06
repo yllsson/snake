@@ -20,6 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
       interval = setInterval(() => {
         console.log('Snake is moving');
+        freeSnakeMovement();
       }, snakeSpeed);
     } else {
       gameIsRunning = false;
@@ -30,4 +31,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   startStopButton.addEventListener('click', startStopGame);
 
+  const freeSnakeMovement = () => {
+    squares.forEach((square) => {
+      square.classList.remove('snake');
+    });
+    console.log(squares);
+  };
 });
