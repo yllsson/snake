@@ -44,10 +44,12 @@ body {
 
 button {
   background-color: mediumpurple;
+  color: #fff;
+  font-size: 2rem;
   border: 0.1rem solid #333;
   margin-bottom: 2rem;
-  height: 5rem;
-  width: 10rem;
+  height: 7.5rem;
+  width: 15rem;
 }
 
 button:hover {

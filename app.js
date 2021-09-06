@@ -1,27 +1,36 @@
 window.addEventListener('DOMContentLoaded', () => {
   console.log('DOM loaded');
 
+  // grab button and game squares
   const startStopButton = document.getElementById('startStopButton');
   const squares = document.querySelectorAll('.gameBoard div');
-  console.log(squares);
+  const scoreDisplay = document.querySelector('span');
 
+  // snake
   let snake = [0, 0, 0];
   let snakeHeadPosition = snake[0];
   squares[snakeHeadPosition].classList.add('snake');
+
+  // fruit
+  let fruitPosition = 0;
+
+  // states
   const width = 10;
   let direction = 0;
   let snakeSpeed = 1000;
   let interval;
   let gameIsRunning = false;
+  let score = 0;
 
   const startStopGame = () => {
     if (!gameIsRunning) {
       gameIsRunning = true;
-      direction += 1;
+      direction = 1;
       startStopButton.innerText = 'Reset game';
+      spawnFruit();
 
       interval = setInterval(() => {
-        console.log('Snake is moving');
+        console.log(`Snake is moving at ${snakeSpeed}`);
         handleSnakeMovement();
       }, snakeSpeed);
     } else {
@@ -29,23 +38,27 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  startStopButton.addEventListener('click', startStopGame);
+
   const resetGame = () => {
+    console.log('clearing interval');
     clearInterval(interval);
+
+    gameIsRunning = false;
+    startStopButton.innerText = 'Start game';
+
     squares.forEach((square) => {
       square.classList.remove('snake');
     });
-    gameIsRunning = false;
-    startStopButton.innerText = 'Start game';
-    console.log('clearing interval');
 
     snake = [0, 0, 0];
     snakeHeadPosition = snake[0];
-    direction = 0;
-
     squares[snakeHeadPosition].classList.add('snake');
-  };
 
-  startStopButton.addEventListener('click', startStopGame);
+    direction = 0;
+    score = 0;
+    scoreDisplay.innerText = score;
+  };
 
   const handleSnakeMovement = () => {
     squares.forEach((square) => {
@@ -71,13 +84,29 @@ window.addEventListener('DOMContentLoaded', () => {
         snake.unshift(snakeHeadPosition + direction);
         snakeHeadPosition = snake[0];
 
-        console.log(snake);
-
         snake.forEach((square) => {
           squares[square].classList.add('snake');
         });
+
+        if (snakeHeadPosition === fruitPosition) {
+          spawnFruit();
+          score++;
+          scoreDisplay.innerText = score;
+          snake.push(tailPosition);
+          snakeSpeed -= 100;
+          clearInterval(interval);
+          interval = setInterval(() => {
+            handleSnakeMovement();
+          }, snakeSpeed);
+        }
       }
     }
+  };
+
+  const spawnFruit = () => {
+    squares[fruitPosition].classList.remove('fruit');
+    fruitPosition = Math.floor(Math.random() * 100);
+    squares[fruitPosition].classList.add('fruit');
   };
 
   window.addEventListener('keyup', (event) => {
