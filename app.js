@@ -5,7 +5,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.gameBoard div');
   console.log(squares);
 
-  let snakeHeadPosition = 0;
+  let snake = [0, 0, 0];
+  let snakeHeadPosition = snake[0];
   squares[snakeHeadPosition].classList.add('snake');
   const width = 10;
   let direction = 0;
@@ -37,7 +38,8 @@ window.addEventListener('DOMContentLoaded', () => {
     startStopButton.innerText = 'Start game';
     console.log('clearing interval');
 
-    snakeHeadPosition = 0;
+    snake = [0];
+    snakeHeadPosition = snake[0];
     direction = 0;
 
     squares[snakeHeadPosition].classList.add('snake');
@@ -50,8 +52,6 @@ window.addEventListener('DOMContentLoaded', () => {
       square.classList.remove('snake');
     });
 
-    console.log(snakeHeadPosition % width === 0 && direction === -1);
-
     if (
       (snakeHeadPosition % width === 9 && direction === 1) ||
       (snakeHeadPosition % width === 0 && direction === -1) ||
@@ -61,8 +61,22 @@ window.addEventListener('DOMContentLoaded', () => {
       console.log('Crash!');
       resetGame();
     } else {
-      snakeHeadPosition += direction;
-      squares[snakeHeadPosition].classList.add('snake');
+      if (snake.length < 3) {
+        snake.unshift(snakeHeadPosition + direction);
+        snakeHeadPosition = snake[0];
+      } else {
+        const tailPosition = snake.pop();
+        squares[tailPosition].classList.remove('snake');
+
+        snake.unshift(snakeHeadPosition + direction);
+        snakeHeadPosition = snake[0];
+
+        console.log(snake);
+
+        snake.forEach((square) => {
+          squares[square].classList.add('snake');
+        });
+      }
     }
   };
 });
