@@ -1,17 +1,16 @@
 window.addEventListener('DOMContentLoaded', () => {
   console.log('DOM loaded');
 
-  let snake = document.querySelectorAll('.snake');
   const startStopButton = document.getElementById('startStopButton');
   const gameBoard = document.querySelector('.gameBoard');
   let squares = gameBoard.querySelectorAll('div');
   console.log(squares);
+  let snakeHeadPosition = 0;
 
   let direction = 0;
   let snakeSpeed = 1000;
   let interval;
   let gameIsRunning = false;
-  console.log(snake);
 
   const startStopGame = () => {
     if (!gameIsRunning) {
@@ -35,6 +34,9 @@ window.addEventListener('DOMContentLoaded', () => {
     squares.forEach((square) => {
       square.classList.remove('snake');
     });
+
+    snakeHeadPosition += 1;
+    squares[snakeHeadPosition].classList.add('snake');
     console.log(squares);
   };
 });
