@@ -11,7 +11,7 @@ html {
 body {
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 
@@ -24,12 +24,9 @@ body {
   flex-wrap: wrap;
   width: 40rem;
   height: 40rem;
-  border: solid 1px black;
-  margin-bottom: 2rem;
-}
-
-button {
-  margin-bottom: 2rem;
+  border: 0.5rem solid #333;
+  border-style: outset;
+  margin-right: 2rem;
 }
 
 .gameBoard div {
@@ -43,4 +40,27 @@ button {
 
 .fruit {
   background-color: orange;
+}
+
+button {
+  background-color: mediumpurple;
+  border: 0.1rem solid #333;
+  margin-bottom: 2rem;
+  height: 5rem;
+  width: 10rem;
+}
+
+button:hover {
+  background-color: mediumorchid;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.toolBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
