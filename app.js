@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded');
-
+  console.log(Math.floor(Math.random() * 3));
   // grab button and game squares
   const startStopButton = document.getElementById('startStopButton');
   const squares = document.querySelectorAll('.gameBoard div');
@@ -56,6 +55,8 @@ window.addEventListener('DOMContentLoaded', () => {
     squares[snakeHeadPosition].classList.add('snake');
 
     direction = 0;
+    snakeSpeed = 1000;
+
     score = 0;
     scoreDisplay.innerText = score;
   };
@@ -69,7 +70,8 @@ window.addEventListener('DOMContentLoaded', () => {
       (snakeHeadPosition % width === 9 && direction === 1) ||
       (snakeHeadPosition % width === 0 && direction === -1) ||
       (snakeHeadPosition <= 9 && direction === -10) ||
-      (snakeHeadPosition >= 90 && direction === 10)
+      (snakeHeadPosition >= 90 && direction === 10) ||
+      squares[snakeHeadPosition + direction].classList.contains('snake')
     ) {
       console.log('Crash!');
       resetGame();
