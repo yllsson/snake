@@ -1,7 +1,9 @@
 window.addEventListener('DOMContentLoaded', function () {
-    // grab button and game squares
+    // grab buttons
     var startStopButton = document.getElementById('startStopButton');
     var squares = document.querySelectorAll('.gameBoard div');
+    var resetPBButton = document.getElementById('resetPBButton');
+    // grab game squares
     var scoreDisplay = document.getElementById('score');
     var bestScoreDisplay = document.getElementById('bestScore');
     // snake
@@ -21,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
         ? parseInt(localStorage.getItem('bestScore'))
         : 0;
     bestScoreDisplay.innerText = bestScore.toString();
-    console.log(localStorage.bestScore);
+    // start and reset game functions and event listeners
     var startStopGame = function () {
         if (!gameIsRunning) {
             gameIsRunning = true;
@@ -53,6 +55,22 @@ window.addEventListener('DOMContentLoaded', function () {
         score = 0;
         scoreDisplay.innerText = score.toString();
     };
+    var spawnFruit = function () {
+        squares[fruitPosition].classList.remove('fruit');
+        fruitPosition = Math.floor(Math.random() * 100);
+        while (squares[fruitPosition].classList.contains('snake')) {
+            fruitPosition = Math.floor(Math.random() * 100);
+        }
+        squares[fruitPosition].classList.add('fruit');
+    };
+    var resetPB = function () {
+        console.log('clearing local storage');
+        bestScore = 0;
+        localStorage.setItem('bestScore', bestScore.toString());
+        bestScoreDisplay.innerText = bestScore.toString();
+    };
+    resetPBButton.addEventListener('click', resetPB);
+    // snake movement functionality
     var handleSnakeMovement = function () {
         if (squares[snakeHeadPosition + direction].classList.contains('snake') ||
             (snakeHeadPosition % width === 9 && direction === 1) ||
@@ -96,14 +114,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-    };
-    var spawnFruit = function () {
-        squares[fruitPosition].classList.remove('fruit');
-        fruitPosition = Math.floor(Math.random() * 100);
-        while (squares[fruitPosition].classList.contains('snake')) {
-            fruitPosition = Math.floor(Math.random() * 100);
-        }
-        squares[fruitPosition].classList.add('fruit');
     };
     window.addEventListener('keyup', function (event) {
         switch (event.code) {

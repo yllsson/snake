@@ -1,7 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
-  // grab button and game squares
+  // grab buttons
   const startStopButton = document.getElementById('startStopButton');
   const squares = document.querySelectorAll('.gameBoard div');
+  const resetPBButton = document.getElementById('resetPBButton');
+
+  // grab game squares
   const scoreDisplay = document.getElementById('score');
   const bestScoreDisplay = document.getElementById('bestScore');
 
@@ -20,12 +23,12 @@ window.addEventListener('DOMContentLoaded', () => {
   let interval;
   let gameIsRunning: boolean = false;
   let score: number = 0;
-
   let bestScore: number = localStorage.bestScore
     ? parseInt(localStorage.getItem('bestScore'))
     : 0;
   bestScoreDisplay.innerText = bestScore.toString();
 
+  // start and reset game functions and event listeners
   const startStopGame = () => {
     if (!gameIsRunning) {
       gameIsRunning = true;
@@ -65,6 +68,25 @@ window.addEventListener('DOMContentLoaded', () => {
     scoreDisplay.innerText = score.toString();
   };
 
+  const spawnFruit = () => {
+    squares[fruitPosition].classList.remove('fruit');
+    fruitPosition = Math.floor(Math.random() * 100);
+    while (squares[fruitPosition].classList.contains('snake')) {
+      fruitPosition = Math.floor(Math.random() * 100);
+    }
+    squares[fruitPosition].classList.add('fruit');
+  };
+
+  const resetPB = () => {
+    console.log('clearing local storage');
+    bestScore = 0;
+    localStorage.setItem('bestScore', bestScore.toString());
+    bestScoreDisplay.innerText = bestScore.toString();
+  };
+
+  resetPBButton.addEventListener('click', resetPB);
+
+  // snake movement functionality
   const handleSnakeMovement = () => {
     if (
       squares[snakeHeadPosition + direction].classList.contains('snake') ||
@@ -113,15 +135,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  };
-
-  const spawnFruit = () => {
-    squares[fruitPosition].classList.remove('fruit');
-    fruitPosition = Math.floor(Math.random() * 100);
-    while (squares[fruitPosition].classList.contains('snake')) {
-      fruitPosition = Math.floor(Math.random() * 100);
-    }
-    squares[fruitPosition].classList.add('fruit');
   };
 
   window.addEventListener('keyup', (event) => {
