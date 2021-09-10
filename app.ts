@@ -20,7 +20,13 @@ window.addEventListener('DOMContentLoaded', () => {
   let interval;
   let gameIsRunning: boolean = false;
   let score: number = 0;
-  let bestScore: number = 0;
+
+  let bestScore: number = localStorage.bestScore
+    ? parseInt(localStorage.getItem('bestScore'))
+    : 0;
+  bestScoreDisplay.innerText = bestScore.toString();
+
+  console.log(localStorage.bestScore);
 
   const startStopGame = () => {
     if (!gameIsRunning) {
@@ -97,6 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
           if (score > bestScore) {
             bestScore = score;
             bestScoreDisplay.innerText = bestScore.toString();
+            localStorage.setItem('bestScore', bestScore.toString());
           }
 
           snake.push(tailPosition);

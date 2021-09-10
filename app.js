@@ -17,7 +17,11 @@ window.addEventListener('DOMContentLoaded', function () {
     var interval;
     var gameIsRunning = false;
     var score = 0;
-    var bestScore = 0;
+    var bestScore = localStorage.bestScore
+        ? parseInt(localStorage.getItem('bestScore'))
+        : 0;
+    bestScoreDisplay.innerText = bestScore.toString();
+    console.log(localStorage.bestScore);
     var startStopGame = function () {
         if (!gameIsRunning) {
             gameIsRunning = true;
@@ -81,6 +85,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     if (score > bestScore) {
                         bestScore = score;
                         bestScoreDisplay.innerText = bestScore.toString();
+                        localStorage.setItem('bestScore', bestScore.toString());
                     }
                     snake.push(tailPosition);
                     snakeSpeed -= 50;
