@@ -60,20 +60,19 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const handleSnakeMovement = () => {
-    squares.forEach((square) => {
-      square.classList.remove('snake');
-    });
-
     if (
+      squares[snakeHeadPosition + direction].classList.contains('snake') ||
       (snakeHeadPosition % width === 9 && direction === 1) ||
       (snakeHeadPosition % width === 0 && direction === -1) ||
       (snakeHeadPosition <= 9 && direction === -10) ||
-      (snakeHeadPosition >= 90 && direction === 10) ||
-      squares[snakeHeadPosition + direction].classList.contains('snake')
+      (snakeHeadPosition >= 90 && direction === 10)
     ) {
       console.log('Crash!');
       resetGame();
     } else {
+      squares.forEach((square) => {
+        square.classList.remove('snake');
+      });
       if (snake.length < 3) {
         snake.unshift(snakeHeadPosition + direction);
         snakeHeadPosition = snake[0];
@@ -122,8 +121,6 @@ window.addEventListener('DOMContentLoaded', () => {
         break;
       case 'ArrowRight':
         direction = 1;
-        break;
-      default:
         break;
     }
   });
