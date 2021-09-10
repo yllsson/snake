@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', () => {
-  console.log(Math.floor(Math.random() * 3));
   // grab button and game squares
   const startStopButton = document.getElementById('startStopButton');
   const squares = document.querySelectorAll('.gameBoard div');
@@ -16,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // states
   const width = 10;
   let direction = 0;
-  let snakeSpeed = 1000;
+  let snakeSpeed = 900;
   let interval;
   let gameIsRunning = false;
   let score = 0;
@@ -29,7 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
       spawnFruit();
 
       interval = setInterval(() => {
-        console.log(`Snake is moving at ${snakeSpeed}`);
         handleSnakeMovement();
       }, snakeSpeed);
     } else {
@@ -55,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
     squares[snakeHeadPosition].classList.add('snake');
 
     direction = 0;
-    snakeSpeed = 1000;
+    snakeSpeed = 900;
 
     score = 0;
     scoreDisplay.innerText = score;
@@ -95,7 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
           score++;
           scoreDisplay.innerText = score;
           snake.push(tailPosition);
-          snakeSpeed -= 100;
+          snakeSpeed -= 50;
           clearInterval(interval);
           interval = setInterval(() => {
             handleSnakeMovement();
