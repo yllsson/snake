@@ -2,7 +2,8 @@ window.addEventListener('DOMContentLoaded', function () {
     // grab button and game squares
     var startStopButton = document.getElementById('startStopButton');
     var squares = document.querySelectorAll('.gameBoard div');
-    var scoreDisplay = document.querySelector('span');
+    var scoreDisplay = document.getElementById('score');
+    var bestScoreDisplay = document.getElementById('bestScore');
     // snake
     var snake = [0, 0, 0];
     var snakeHeadPosition = snake[0];
@@ -16,6 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
     var interval;
     var gameIsRunning = false;
     var score = 0;
+    var bestScore = 0;
     var startStopGame = function () {
         if (!gameIsRunning) {
             gameIsRunning = true;
@@ -76,6 +78,10 @@ window.addEventListener('DOMContentLoaded', function () {
                     spawnFruit();
                     score++;
                     scoreDisplay.innerText = score.toString();
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestScoreDisplay.innerText = bestScore.toString();
+                    }
                     snake.push(tailPosition);
                     snakeSpeed -= 50;
                     clearInterval(interval);
