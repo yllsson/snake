@@ -26,8 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
     : 0;
   bestScoreDisplay.innerText = bestScore.toString();
 
-  console.log(localStorage.bestScore);
-
   const startStopGame = () => {
     if (!gameIsRunning) {
       gameIsRunning = true;
