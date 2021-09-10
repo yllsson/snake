@@ -70,11 +70,11 @@ window.addEventListener('DOMContentLoaded', function () {
     resetPBButton.addEventListener('click', resetPB);
     // snake movement functionality
     var handleSnakeMovement = function () {
-        if (squares[snakeHeadPosition + direction].classList.contains('snake') ||
-            (snakeHeadPosition % width === 9 && direction === 1) ||
+        if ((snakeHeadPosition % width === 9 && direction === 1) ||
             (snakeHeadPosition % width === 0 && direction === -1) ||
             (snakeHeadPosition <= 9 && direction === -10) ||
-            (snakeHeadPosition >= 90 && direction === 10)) {
+            (snakeHeadPosition >= 90 && direction === 10) ||
+            squares[snakeHeadPosition + direction].classList.contains('snake')) {
             resetGame();
         }
         else {

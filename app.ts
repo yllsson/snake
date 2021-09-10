@@ -87,11 +87,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // snake movement functionality
   const handleSnakeMovement = () => {
     if (
-      squares[snakeHeadPosition + direction].classList.contains('snake') ||
       (snakeHeadPosition % width === 9 && direction === 1) ||
       (snakeHeadPosition % width === 0 && direction === -1) ||
       (snakeHeadPosition <= 9 && direction === -10) ||
-      (snakeHeadPosition >= 90 && direction === 10)
+      (snakeHeadPosition >= 90 && direction === 10) ||
+      squares[snakeHeadPosition + direction].classList.contains('snake')
     ) {
       resetGame();
     } else {
