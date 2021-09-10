@@ -105,6 +105,9 @@ window.addEventListener('DOMContentLoaded', () => {
   const spawnFruit = () => {
     squares[fruitPosition].classList.remove('fruit');
     fruitPosition = Math.floor(Math.random() * 100);
+    while (squares[fruitPosition].classList.contains('snake')) {
+      fruitPosition = Math.floor(Math.random() * 100);
+    }
     squares[fruitPosition].classList.add('fruit');
   };
 
