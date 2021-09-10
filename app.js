@@ -40,7 +40,6 @@ window.addEventListener('DOMContentLoaded', function () {
     };
     startStopButton.addEventListener('click', startStopGame);
     var resetGame = function () {
-        console.log('clearing interval');
         clearInterval(interval);
         gameIsRunning = false;
         startStopButton.innerText = 'Start game';
@@ -64,7 +63,6 @@ window.addEventListener('DOMContentLoaded', function () {
         squares[fruitPosition].classList.add('fruit');
     };
     var resetPB = function () {
-        console.log('clearing local storage');
         bestScore = 0;
         localStorage.setItem('bestScore', bestScore.toString());
         bestScoreDisplay.innerText = bestScore.toString();
@@ -77,7 +75,6 @@ window.addEventListener('DOMContentLoaded', function () {
             (snakeHeadPosition % width === 0 && direction === -1) ||
             (snakeHeadPosition <= 9 && direction === -10) ||
             (snakeHeadPosition >= 90 && direction === 10)) {
-            console.log('Crash!');
             resetGame();
         }
         else {
