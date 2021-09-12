@@ -1,3 +1,10 @@
+:root {
+  --main-bg-color: #fff9a5;
+  --console-color: #5c67ff;
+  --button-color: #e18335;
+  --snake-color: cadetblue;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,7 +16,7 @@ html {
 }
 
 body {
-  background-color: #5f9ea0;
+  background-color: var(--main-bg-color);
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -20,14 +27,14 @@ body {
 }
 
 main {
-  background-color: #a3a3a3;
+  background-color: var(--console-color);
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 
-  border: 0.7rem solid #a0a0a0;
+  border: 0.7rem solid var(--console-color);
   border-style: outset;
   border-radius: 0.4rem;
   padding: 3rem;
@@ -48,7 +55,7 @@ main {
   flex-wrap: wrap;
   width: 40rem;
   height: 40rem;
-  border: 0.4rem solid #a0a0a0;
+  border: 0.4rem solid var(--console-color);
   border-style: inset;
   margin-right: 2rem;
 }
@@ -59,7 +66,7 @@ main {
 }
 
 .snake {
-  background-color: cadetblue;
+  background-color: var(--snake-color);
 }
 
 .fruit {
@@ -75,21 +82,23 @@ main {
 }
 
 button {
-  background-color: #963d5a;
+  background-color: var(--button-color);
   color: #fff;
   font-size: 2rem;
-  border: 0.1rem solid #333;
+  border: 0.3rem solid var(--button-color);
+  border-style: outset;
   margin-bottom: 2rem;
   height: 7.5rem;
   width: 15rem;
 }
 
 button:hover {
-  background-color: mediumorchid;
+  background-color: #e4914e;
 }
 
 button:active {
-  transform: scale(0.97);
+  /* transform: scale(0.97); */
+  border-style: inset;
 }
 
 .toolBar p {
