@@ -9,14 +9,28 @@ html {
 }
 
 body {
+  background-color: #5f9ea0;
   height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
   font-size: 1.6rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  background-color: #a3a3a3;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.7rem solid #a0a0a0;
+  border-style: outset;
+  border-radius: 0.4rem;
+  padding: 3rem;
 }
 
 .container {
@@ -28,12 +42,14 @@ body {
 
 /* Game Board styles */
 .gameBoard {
+  background-color: #fff;
+
   display: flex;
   flex-wrap: wrap;
   width: 40rem;
   height: 40rem;
-  border: 0.5rem solid #333;
-  border-style: outset;
+  border: 0.4rem solid #a0a0a0;
+  border-style: inset;
   margin-right: 2rem;
 }
 
@@ -47,7 +63,7 @@ body {
 }
 
 .fruit {
-  background-color: orange;
+  background-color: #ffa500;
 }
 
 /* Toolbar styles (including Button styles) */
@@ -59,7 +75,7 @@ body {
 }
 
 button {
-  background-color: mediumpurple;
+  background-color: #963d5a;
   color: #fff;
   font-size: 2rem;
   border: 0.1rem solid #333;
